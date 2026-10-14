@@ -1,0 +1,23 @@
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        sp = [[] for _ in range(len(nums) + 1)]
+        res = []
+
+        # заполнить sp
+        for num in nums:
+            cnt = nums.count(num)
+            if num not in sp[cnt - 1]:
+                sp[cnt - 1].append(num)
+
+        # идем в обратно направлении sp и добавляем значение/я в res
+        for i in range(len(sp) - 1, -1, -1):
+            if sp[i]:
+                for num in sp[i]:
+                    res.append(num)
+                    k -= 1
+            if k == 0:
+                return res
+
+        return []
+
+        
